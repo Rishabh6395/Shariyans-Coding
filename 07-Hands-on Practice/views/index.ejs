@@ -16,11 +16,11 @@
             placeholder="Title Goes here"
             name="title"
           />
-          <textarea
+          <input
             class="block rounded-md outline-none w-full mt-2 px-5 py-2 resize-none bg-zinc-800"
             placeholder="Write your tasks details"
             name="details"
-          ></textarea>
+          ></input>
           <input
             class="mt-2 bg-blue-600 px-5 py-2 rounded-md"
             type="submit"
@@ -35,7 +35,10 @@
               <h1 class="text-white text-3xl tracking-tighter">
                 <%= val %>
               </h1>
-              <a class="text-blue-500 inline-mt-3" href="/files/<%= val %>">Read More.</a>
+              <div class="flex  w-full justify-between items-center mt-3">
+                <a class="text-blue-500 inline-block" href="/files/<%= val %>">Read More.</a>
+                <a class="text-zinc-600 inline-mt-3" href="/edit/<%= val %>">edit filename</a>
+              </div>
             </div>
           <% }); %>
         <% } else { %>

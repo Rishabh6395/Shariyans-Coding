@@ -2,6 +2,12 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const fs = require('fs')
+// const bodyParser = require('body-parser');
+
+
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+
 
 app.set("view engine", 'ejs')
 app.use(express.json())
@@ -14,6 +20,17 @@ app.get('/', function(req,res){
         res.render("index", {files: files})
     })
 })
+
+app.get('/edit/:filename', function(req,res){
+    res.render('edit', {filename: req.params.filename})
+})
+
+app.post('/edit', function(req,res){
+    fs.rename(`./files/${req.body.previous}`, `./files/${req.body.new}`, function(err){
+        res.redirect('/')
+    })
+})
+
 app.get('/files/:filename', function(req,res){
     fs.readFile(`./files/${req.params.filename}`, "utf-8", function(err, filedata){
         if (err) {
